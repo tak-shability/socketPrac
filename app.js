@@ -20,8 +20,9 @@ io.on('connection', (socket) => {
         data.pcb.sort((a, b) => a.numb-b.numb)
         for (let i=0; i < data.pcb.length; i++) {
             console.log(`전력 정보 ${i+1}번 포트: ${JSON.stringify(data.pcb[i])}`)
+            
+        console.log(data.pcb.numb[i])
         }
-        console.log(data.pcb.numb)
     })
 })
 
