@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
         console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`)
         console.log(data.pcb)
         data.pcb.sort((a, b) => {
-            console.log(a.numb - b.numb)
+            return a.numb - b.nummb
         })
     })
 })
