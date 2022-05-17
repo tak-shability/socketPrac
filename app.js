@@ -17,10 +17,10 @@ io.on('connection', (socket) => {
         if (typeof(data) !== 'object') data = JSON.parse(data)
         console.log('data: ', data)
         console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`)
-        
-        data.pcb.sort((a, b) => {
-            console.log(a.localeCompare(b))
-        })
+        for (let i = 0; i < data.pcb.length; i++) {
+            data.pcb.id = Number(data.pcb[i].id)
+        }
+        console.log(data.pcb)
     })
 })
 
