@@ -3,7 +3,11 @@ const app = express();
 const http = require('http').createServer(app);
 const socket = require('socket.io');
 const io = socket(http)
-const port = 3000;
+const port = 80;
+
+// app.use('/', (req, res) => {
+//     res.send('hello')
+// })
 
 io.on('connection', (socket) => {
     console.log(`커넥션 이벤트 발생, 소켓 아이디: ${socket.id}`)
