@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
         console.log('data: ', data)
         console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`)
         for (let i = 0; i < data.pcb.length; i++) {
-            data.pcb.id = Number(data.pcb[i].id)
+            data.pcb.numb = Number(data.pcb[i].numb)
         }
         console.log(data.pcb)
     })
