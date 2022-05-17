@@ -15,7 +15,11 @@ io.on('connection', (socket) => {
 
     socket.on('insert', (data) => {
         if (typeof(data) !== 'object') data = JSON.parse(data)
-        console.log('data', data)
+        console.log('data: ', data)
+        console.log(`스테이션 데이터 확인 이벤트 발생,\n 소켓 아이디: ${socket.id},\n 태양광 정보: ${data.pv},`)
+        data.pcb.sort((a, b) => {
+            console.log(a.numb - b.numb)
+        })
     })
 })
 
