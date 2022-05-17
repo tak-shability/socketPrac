@@ -10,11 +10,12 @@ const port = 80;
 // })
 
 io.on('connection', (socket) => {
+    console.log('socket', socket)
     console.log(`커넥션 이벤트 발생, 소켓 아이디: ${socket.id}`)
 
     socket.on('login', (user) => {
         console.log('user', user)
-        console.log(`로그인 이벤트 발생, 로그인 타입: ${user.type}, 아이디: ${user.id}, 소켓 아이디: ${socket.id}`)
+        console.log(`로그인 이벤트 발생, 로그인 타입: ${user.type}, 아이디: ${user.name}, 소켓 아이디: ${socket.id}`)
     
     socket.on('insert', (data) => {
         if (typeof(data) !== 'object') data = JSON.parse(data)
