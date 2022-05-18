@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
         socket.join(user.type);
         io.to('admin').emit('join', {
             userType: user.type,
-            msg: `${user.name}님이 입장하셨습니다.`,
+            message: `${user.name}님이 ${user.type} 방에 입장하셨습니다.`,
         });
         io.emit('result', {
             code: 'login',
