@@ -7,7 +7,7 @@ const io = socket(http);
 const port = 80;
 
 app.use('/', (req, res) => {
-    res.sendFile(__dirname + '/chat.html');
+    res.sendFile(__dirname + '/test.html');
 });
 
 io.on('connection', (socket) => {
