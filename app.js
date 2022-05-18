@@ -11,7 +11,6 @@ app.use('/', (req, res) => {
 
 io.on('connection', (socket) => {
     const adminID = socket.id;
-    console.log(adminID);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -52,8 +51,11 @@ io.on('connection', (socket) => {
                 console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
             }
         };
+
         insertData();
-        io.to(adminID).emit('insertData', insertData());
+
+        // io.to(adminID).emit('insertData', insertData());
+        io.sockets.in(adminID).emit('insertData', insertData());
 
         io.emit('result', {
             code: 'insert',
