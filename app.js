@@ -10,6 +10,7 @@ app.use('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+    const adminID = socket.id;
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -51,7 +52,7 @@ io.on('connection', (socket) => {
             }
         };
         insertData();
-        io.to('BGiba7pNd44SL1VYAAAA').emit('insertData', insertData);
+        io.to(adminID).emit('insertData', insertData);
 
         io.emit('result', {
             code: 'insert',
