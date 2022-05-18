@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
         insertData();
 
         // io.to(adminID).emit('insertData', insertData());
-        io.sockets.in(adminID).emit('insertData', insertData());
+        io.sockets.in(adminID).emit('insertData', `특정 1인에 대한 insert data: ${insertData()}`);
 
         io.emit('result', {
             code: 'insert',
