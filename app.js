@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
 
     socket.on('insert', (data) => {
         if (!data) {
-            socket.emit('result', {
+            io.emit('result', {
                 code: 'insert',
                 data: false,
                 detail: '존재하지 않는 정보',
@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
         for (let i = 0; i < data.pcb.length; i++) {
             console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
         }
-        socket.emit('result', {
+        io.emit('result', {
             code: 'insert',
             data: true,
         });
