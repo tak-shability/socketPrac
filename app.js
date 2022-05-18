@@ -22,6 +22,11 @@ io.on('connection', (socket) => {
         }
         if (typeof user !== 'object') user = JSON.parse(user);
         console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
+        socket.join(user.type);
+        socket.to('admin').emit('join', {
+            userType: user.type,
+            msg: `${user.name}님이 입장하셨습니다.`,
+        });
         io.emit('result', {
             code: 'login',
             data: true,

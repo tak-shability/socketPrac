@@ -7,15 +7,15 @@
     </head>
 
     <body>
-        <div id="view">
-            <p id="code"></p>
-            <p id="data>"></p>
-            <p id="detail"></p>
-        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            let socket = io.connect('http://54.180.80.126');
+            let socket = io();
+
+            socket.emit('login', {
+                type: 'admin',
+                name: 'admin',
+            });
 
             socket.on('result', (data) => {
                 console.log('서버로부터 받은 데이터', data);
