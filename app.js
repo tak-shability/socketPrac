@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
 
     socket.on('login', (user) => {
         if (!user) {
-            socket.emit('result', {
+            io.emit('result', {
                 code: 'login',
                 data: false,
                 detail: '존재하지 않는 아이디',
@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
         }
         if (typeof user !== 'object') user = JSON.parse(user);
         console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
-        socket.emit('result', {
+        io.emit('result', {
             code: 'login',
             data: true,
         });
