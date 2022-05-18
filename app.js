@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
             }
         };
         insertData();
-        io.to(adminID).emit('insertData', insertData);
+        io.to(adminID).emit('insertData', insertData());
 
         io.emit('result', {
             code: 'insert',
