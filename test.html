@@ -16,12 +16,9 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             let socket = io.connect('http://54.180.80.126');
-            io.emit('connection', (socket) => {
-                console.log('connection', socket.id);
 
-                socket.on('result', (data) => {
-                    console.log('front data', data);
-                });
+            socket.on('result', (data) => {
+                console.log('front data', data);
             });
         </script>
         <h1>Connected</h1>
