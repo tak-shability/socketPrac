@@ -11,6 +11,7 @@ app.use('/', (req, res) => {
 
 io.on('connection', (socket) => {
     const adminID = socket.id;
+    console.log(adminID);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
