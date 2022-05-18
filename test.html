@@ -17,10 +17,10 @@
         <script>
             let socket = io.connect('http://54.180.80.126');
 
-            socket.emit('login', {
-                type: '123',
-                name: 'hello',
-            });
+            // socket.emit('login', {
+            //     type: '123',
+            //     name: 'hello',
+            // });
 
             socket.on('result', (data) => {
                 console.log('front data', data);
