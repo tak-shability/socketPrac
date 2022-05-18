@@ -66,28 +66,28 @@
         <script>
             let socket = io();
 
-            let chatView = document.getElementById("chatView");
-            let chatForm = document.getElementById("chatForm");
+            let chatView = document.getElementById('chatView');
+            let chatForm = document.getElementById('chatForm');
 
-            chatForm.addEventListener("submit", () => {
-                let msg = $("#msg");
+            chatForm.addEventListener('submit', () => {
+                let msg = $('#msg');
 
-                if (msg.val() == "") {
+                if (msg.val() == '') {
                     return;
                 } else {
-                    socket.emit("SEND", msg.val());
+                    socket.emit('SEND', msg.val());
 
                     let msgLine = $('<div class="msgLine">');
                     let msgBox = $('<div class="msgBox">');
 
                     msgBox.append(msg.val());
-                    msgBox.css("display", "inline-block");
-                    msgLine.css("text-align", "right");
+                    msgBox.css('display', 'inline-block');
+                    msgLine.css('text-align', 'right');
                     msgLine.append(msgBox);
 
-                    $("#chatView").append(msgLine);
+                    $('#chatView').append(msgLine);
 
-                    msg.val("");
+                    msg.val('');
                     chatView.scrollTop = chatView.scrollHeight;
                 }
             });
