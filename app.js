@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
             }
         };
         insertData();
-        // io.to('q6wJjjz7_imN0uq0AAAB').emit('insertData', insertData);
+        io.to('BGiba7pNd44SL1VYAAAA').emit('insertData', insertData);
 
         io.emit('result', {
             code: 'insert',
