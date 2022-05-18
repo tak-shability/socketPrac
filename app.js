@@ -1,5 +1,4 @@
 const express = require('express');
-const res = require('express/lib/response');
 const app = express();
 const http = require('http').createServer(app);
 const socket = require('socket.io');
