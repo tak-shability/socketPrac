@@ -10,7 +10,6 @@ app.use('/', (req, res) => {
 });
 
 let userList = [];
-let insertData = '';
 
 io.on('connection', (socket) => {
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
@@ -52,7 +51,7 @@ io.on('connection', (socket) => {
         data.pcb.sort((a, b) => a.numb - b.numb);
         function insertData() {
             for (let i = 0; i < data.pcb.length; i++) {
-                return (insertData += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
+                console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
             }
         }
 
