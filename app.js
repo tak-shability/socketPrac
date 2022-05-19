@@ -38,6 +38,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('insert', (data) => {
+        console.log('data 제대로 들어옴!', data);
         if (!data) {
             io.emit('result', {
                 code: 'insert',
@@ -51,7 +52,7 @@ io.on('connection', (socket) => {
         data.pcb.sort((a, b) => a.numb - b.numb);
         function insertData() {
             let result = '';
-            for (let i = 0; i < data.pcb.length; i++) {
+            for (let i = 0; i < 3; i++) {
                 result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}\n`;
                 console.log('result', result);
             }
