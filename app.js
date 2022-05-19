@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
         function insert() {
             let result = '';
             for (let i = 0; i < 3; i++) {
-                result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}\n`;
+                result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(insertData.pcb[i])}\n`;
             }
             return result;
         }
