@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
 
         insertData();
 
-        io.to(userList[0].socketID).emit('insertData', insertData());
+        io.to(userList[1].socketID).emit('insertData', insertData());
         // io.sockets.in(adminID).emit('insertData', `특정 1인에 대한 insert data: ${insertData()}`);
         // '특정 1인에 대한 insert data' 가 나오지 않으나, insert data는 정상적으로 나옴.
 
