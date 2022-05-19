@@ -50,9 +50,11 @@ io.on('connection', (socket) => {
         data.pcb.map((v) => Number(v.numb));
         data.pcb.sort((a, b) => a.numb - b.numb);
         function insertData() {
+            let result = '';
             for (let i = 0; i < data.pcb.length; i++) {
-                console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
+                result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`;
             }
+            return result;
         }
 
         // insertData();
