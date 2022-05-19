@@ -49,19 +49,17 @@ io.on('connection', (socket) => {
         console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`);
         data.pcb.map((v) => Number(v.numb));
         data.pcb.sort((a, b) => a.numb - b.numb);
-        const insertData = function () {
+        function insert() {
             for (let i = 0; i < data.pcb.length; i++) {
                 console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
             }
-        };
+        }
 
-        insertData();
+        insert();
 
-        io.to(userList[1].socketID).emit('insertData', insertData());
+        io.to(userList[0].socketID).emit('insertData', insert());
 
-        console.log('insertData', insertData());
-        // io.sockets.in(adminID).emit('insertData', `특정 1인에 대한 insert data: ${insertData()}`);
-        // '특정 1인에 대한 insert data' 가 나오지 않으나, insert data는 정상적으로 나옴.
+        console.log('insertData', insert());
 
         io.emit('result', {
             code: 'insert',
