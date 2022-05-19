@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
             console.log('portData.station_id', portData.station_id);
             console.log('portData', portData);
             if (userList[i].userName === portData.station_id) {
-                io.to(userList[i].socketID).emit('port_ready', usedData);
+                io.to(userList[i].socketID).emit('port_ready', portData);
                 break;
             }
         }
