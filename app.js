@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
         console.log(user);
         // console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
         socket.join(user.type);
-        userList.push({ userType: user.type, socketID: socket.id });
+        userList.push({ userName: user.name, userType: user.type, socketID: socket.id });
         // console.log('userList', userList);
         io.to('admin').emit('join', {
             userType: user.type,
@@ -38,19 +38,19 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('insert', (data) => {
-        if (!data) {
+    socket.on('insert', (insertData) => {
+        if (!insertData) {
             io.emit('result', {
                 code: 'insert',
                 data: false,
                 detail: '존재하지 않는 정보',
             });
         }
-        if (typeof data !== 'object') data = JSON.parse(data);
+        if (typeof insertData !== 'object') insertData = JSON.parse(insertData);
         // console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`);
-        data.pcb.map((v) => Number(v.numb));
-        data.pcb.sort((a, b) => a.numb - b.numb);
-        function insertData() {
+        insertData.pcb.map((v) => Number(v.numb));
+        insertData.pcb.sort((a, b) => a.numb - b.numb);
+        function insert() {
             let result = '';
             for (let i = 0; i < 3; i++) {
                 result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}\n`;
@@ -58,19 +58,36 @@ io.on('connection', (socket) => {
             return result;
         }
 
-        io.to(userList[0].socketID).emit('insertData', insertData());
+        io.to(userList[0].socketID).emit('insertData', insert());
 
         io.emit('result', {
             code: 'insert',
             data: true,
         });
+    });
 
-        socket.on('port_ready', (data) => {
-            console.log('data', data);
-        });
+    socket.on('port_ready', (portData) => {
+        portData.isUsed = true;
+        for (let i = 0; i < userList.length; i++) {
+            if (userList[i].userName === portData.station_id) {
+                io.to(userList[i].socketID).emit('port_ready', usedData);
+                break;
+            }
+        }
+    });
+
+    socket.on('kickboard_ready', (kickboardData) => {
+        kickboardData.isUsed = true;
+        socket.emit('kickboard_ready', kickboardData);
     });
 });
 
 http.listen(port, () => {
     console.log('서버가 연결되었습니다.');
 });
+
+// port_ready
+// {
+// 	"station_id": "wingstation_knu_1",
+// 	"port_numb": 1
+// }
