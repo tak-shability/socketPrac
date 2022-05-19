@@ -38,7 +38,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('insert', (data) => {
-        console.log('data 제대로 들어옴!', data);
         if (!data) {
             io.emit('result', {
                 code: 'insert',
@@ -54,14 +53,11 @@ io.on('connection', (socket) => {
             let result = '';
             for (let i = 0; i < 3; i++) {
                 result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}\n`;
-                console.log('result', result);
             }
             return result;
         }
 
-        // insertData();
-
-        // io.to(userList[0].socketID).emit('insertData', insertData());
+        io.to(userList[0].socketID).emit('insertData', insertData());
 
         console.log('insertData', insertData());
 
