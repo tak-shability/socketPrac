@@ -49,17 +49,17 @@ io.on('connection', (socket) => {
         console.log(`스테이션 데이터 확인 이벤트 발생\n소켓 아이디: ${socket.id}\n태양광 정보: ${JSON.stringify(data.pv)}`);
         data.pcb.map((v) => Number(v.numb));
         data.pcb.sort((a, b) => a.numb - b.numb);
-        function insert() {
+        insertData(() => {
             for (let i = 0; i < data.pcb.length; i++) {
                 console.log(`전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`);
             }
-        }
+        });
 
-        insert();
+        insertData();
 
-        io.to(userList[0].socketID).emit('insertData', insert());
+        io.to(userList[0].socketID).emit('insertData', insertData());
 
-        console.log('insertData', insert());
+        console.log('insertData', insertData());
 
         io.emit('result', {
             code: 'insert',
