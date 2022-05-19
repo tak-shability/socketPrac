@@ -52,12 +52,12 @@ io.on('connection', (socket) => {
         function insertData() {
             let result = '';
             for (let i = 0; i < data.pcb.length; i++) {
-                result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}`;
+                result += `전력 정보 ${i + 1}번 포트: ${JSON.stringify(data.pcb[i])}\n`;
             }
             return result;
         }
 
-        // insertData();
+        insertData();
 
         io.to(userList[0].socketID).emit('insertData', insertData());
 
