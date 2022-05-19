@@ -67,8 +67,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('port_ready', (portData) => {
+        console.log('portReady 진입');
         portData.isUsed = true;
         for (let i = 0; i < userList.length; i++) {
+            console.log('userList.userName', userList[i].userName);
+            console.log('portData.station_id', portData.station_id);
             if (userList[i].userName === portData.station_id) {
                 io.to(userList[i].socketID).emit('port_ready', usedData);
                 break;
