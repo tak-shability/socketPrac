@@ -9,8 +9,9 @@ app.use('/', (req, res) => {
     res.sendFile(__dirname + '/test.html');
 });
 
+let adminID;
+
 io.on('connection', (socket) => {
-    const adminID = socket.id;
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -23,6 +24,7 @@ io.on('connection', (socket) => {
         }
         if (typeof user !== 'object') user = JSON.parse(user);
         console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
+        if (user.type === 'admin') adminID = socket.id;
         socket.join(user.type);
         io.to('admin').emit('join', {
             userType: user.type,
