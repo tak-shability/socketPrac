@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
 
         // insertData();
 
-        // io.to(userList[0].socketID).emit('insertData', insertData());
+        io.to(userList[0].socketID).emit('insertData', insertData());
 
         console.log('insertData', insertData());
 
