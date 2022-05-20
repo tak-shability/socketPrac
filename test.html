@@ -11,15 +11,15 @@
                 name: 'admin',
             });
 
-            socket.emit('port_ready', {
-                station_id: 'wingstation_lightening_9',
-                port_numb: 1,
-            });
+            // socket.emit('port_ready', {
+            //     station_id: 'wingstation_lightening_9',
+            //     port_numb: 1,
+            // });
 
-            socket.emit('kickboard_ready', {
-                kickboard_id: 'hello',
-                port_numb: 1,
-            });
+            // socket.emit('kickboard_ready', {
+            //     kickboard_id: 'hello',
+            //     port_numb: 1,
+            // });
 
             socket.on('result', (data) => {
                 console.log('서버로부터 받은 데이터', data);
