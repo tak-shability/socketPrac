@@ -71,6 +71,7 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
+        console.log('변화된 포트데이터', portData);
         io.to(socket.id).emit('charge_ready', portData);
     });
 
