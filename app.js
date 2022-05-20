@@ -12,7 +12,7 @@ app.use('/', (req, res) => {
 let userList = [];
 let socketList = [];
 io.on('connection', (socket) => {
-    let portSocketID1 = socket.id;
+    let portSocketID = socket.id;
     socketList.push(socket.id);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
@@ -69,9 +69,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('port_ready', (portData) => {
-        let portSocketID2 = socket.id;
-        console.log('1111111111', portSocketID1);
-        console.log('2222222222', portSocketID2);
         if (typeof portData !== 'object') portData = JSON.parse(portData);
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
