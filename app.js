@@ -73,8 +73,10 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        io.to(portSocketID).emit('charge_ready', portData);
-        console.log('socketList', socketList);
+        // for (let i =0; i<userList.length; i++) {
+        //     userList[i].
+        //     io.to(portSocketID).emit('charge_ready', portData);
+        // }
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
