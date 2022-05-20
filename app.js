@@ -23,11 +23,11 @@ io.on('connection', (socket) => {
             });
         }
         if (typeof user !== 'object') user = JSON.parse(user);
-        console.log(user);
+        console.log('user 정보', user);
         // console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
         socket.join(user.type);
         userList.push({ userName: user.name, userType: user.type, socketID: socket.id });
-        // console.log('userList', userList);
+        console.log('userList', userList);
         io.to('admin').emit('join', {
             userType: user.type,
             message: `${user.name}님이 ${user.type} 방에 입장하셨습니다.`,
@@ -67,7 +67,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('port_ready', (portData) => {
-        console.log('portReady 진입');
         portData.isUsed = true;
         for (let i = 0; i < userList.length; i++) {
             console.log('userList.userName', userList[i].userName);
@@ -75,7 +74,7 @@ io.on('connection', (socket) => {
             console.log('portData', portData);
             if (userList[i].userName === portData.station_id) {
                 console.log('if문 조건 만족함');
-                io.to(userList[i].socketID).emit('port_ready', portData);
+                io.to(userList[i].socketID).emit('charge_ready', portData);
                 console.log('to 발송 완료?');
                 break;
             }
