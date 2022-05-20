@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
         console.log('socket.id', socket.id);
         portData.isUsed = true;
         io.emit('charge_ready', portData);
-        console.log(socketList);
+        console.log('socketList', socketList);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
