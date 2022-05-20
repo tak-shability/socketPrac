@@ -67,12 +67,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('port_ready', (portData) => {
+        if (typeof portData !== 'object') portData = JSON.parse(portData);
         console.log('port_ready 데이터 받음', portData);
         portData.isUsed = true;
         for (let i = 0; i < userList.length; i++) {
             console.log('userList.userName', userList[i].userName);
             console.log('portData.station_id', portData.station_id);
-            console.log('portData', portData);
             if (userList[i].userName === portData.station_id) {
                 console.log('if문 조건 만족함');
                 io.to(userList[i].socketID).emit('charge_ready', portData);
