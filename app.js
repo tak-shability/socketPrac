@@ -10,10 +10,8 @@ app.use('/', (req, res) => {
 });
 
 let userList = [];
-let socketList = [];
+
 io.on('connection', (socket) => {
-    let portSocketID = socket.id;
-    socketList.push(socket.id);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -70,8 +68,6 @@ io.on('connection', (socket) => {
 
     socket.on('port_ready', (portData) => {
         if (typeof portData !== 'object') portData = JSON.parse(portData);
-        console.log('port_ready 데이터 받음', portData);
-        console.log('socket.id', socket.id);
         portData.isUsed = true;
         for (let i = 0; i < userList.length; i++) {
             if (userList[i].userName === portData.station_id) {
