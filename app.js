@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
         portData.isUsed = true;
         console.log('변화된 포트데이터', portData);
         for (let i = 0; i < socketList.length; i++) {
-            io.to(socketList[i]).emit('charge_ready', portData);
+            socket.to(socketList[i]).emit('charge_ready', portData);
             console.log('socketList[i] === ', socketList[i]);
         }
     });
