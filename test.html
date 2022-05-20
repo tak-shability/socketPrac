@@ -11,11 +11,6 @@
                 name: 'admin',
             });
 
-            // socket.emit('port_ready', {
-            //     station_id: 'wingstation_lightening_9',
-            //     port_numb: 1,
-            // });
-
             // socket.emit('kickboard_ready', {
             //     kickboard_id: 'hello',
             //     port_numb: 1,
@@ -32,10 +27,6 @@
             socket.on('insertData', (insertData) => {
                 console.log('특정 1인에 대한 insert data', `\n ${insertData}`);
             });
-
-            // socket.on('charge_ready', (chargeData) => {
-            //     console.log('charge_ready 이벤트 전송', chargeData);
-            // });
 
             socket.on('kickboard_ready', (kickboardData) => {
                 console.log('kickboard_ready 이벤트 전송', kickboardData);

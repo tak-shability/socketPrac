@@ -10,10 +10,9 @@ app.use('/', (req, res) => {
 });
 
 let userList = [];
-let sockekList = [];
 io.on('connection', (socket) => {
-    sockekList.push(socket.id);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
+    console.log('socket', socket);
 
     socket.on('login', (user) => {
         if (!user) {
@@ -72,7 +71,7 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        io.to(sockekList[-1]).emit('charge_ready', portData);
+        socket.to(sockekList[-1]).emit('charge_ready', portData);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
