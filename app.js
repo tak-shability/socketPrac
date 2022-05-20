@@ -12,6 +12,7 @@ app.use('/', (req, res) => {
 let userList = [];
 
 io.on('connection', (socket) => {
+    let stationSocketID = socket.id;
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -71,7 +72,7 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        io.emit('charge_ready', portData);
+        io.to(stationSocketID).emit('charge_ready', portData);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
