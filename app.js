@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        socket.to(socket.id).emit('charge_ready', portData);
+        io.to(socket.id).emit('charge_ready', portData);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
