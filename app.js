@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
             });
         }
         if (typeof user !== 'object') user = JSON.parse(user);
-        // console.log('user 정보', user);
+        console.log('user 정보', user);
         // console.log(`로그인 이벤트 발생\n로그인 타입: ${user.type}\n아이디: ${user.name}\n소켓 아이디: ${socket.id}`);
         socket.join(user.type);
         userList.push(`connection ${socket.id} = ${user.type}`);
