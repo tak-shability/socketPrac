@@ -68,11 +68,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('port_ready', (portData) => {
+        let portSocketID = socket.id;
         if (typeof portData !== 'object') portData = JSON.parse(portData);
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        io.emit('charge_ready', portData);
+        io.to(portSocketID).emit('charge_ready', portData);
         console.log('socketList', socketList);
     });
 
