@@ -10,10 +10,8 @@ app.use('/', (req, res) => {
 });
 
 let userList = [];
-let socketList = [];
 
 io.on('connection', (socket) => {
-    socketList.push(socket.id);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
 
     socket.on('login', (user) => {
@@ -73,11 +71,7 @@ io.on('connection', (socket) => {
         console.log('port_ready 데이터 받음', portData);
         console.log('socket.id', socket.id);
         portData.isUsed = true;
-        console.log('변화된 포트데이터', portData);
-        for (let i = 0; i < socketList.length; i++) {
-            socket.to(socketList[i]).emit('charge_ready', portData);
-            console.log('socketList[i] === ', socketList[i]);
-        }
+        socket.to(socket.id).emit('charge_ready', portData);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
