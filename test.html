@@ -11,11 +11,6 @@
                 name: 'admin',
             });
 
-            // socket.emit('kickboard_ready', {
-            //     kickboard_id: 'hello',
-            //     port_numb: 1,
-            // });
-
             socket.on('result', (data) => {
                 console.log('서버로부터 받은 데이터', data);
             });
