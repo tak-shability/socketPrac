@@ -10,9 +10,10 @@ app.use('/', (req, res) => {
 });
 
 let userList = [];
+let socketList = [];
 io.on('connection', (socket) => {
+    socketList.push(socket.id);
     console.log(`커넥션 이벤트 발생\n소켓 아이디: ${socket.id}`);
-    console.log('socket', socket);
 
     socket.on('login', (user) => {
         if (!user) {
@@ -72,6 +73,7 @@ io.on('connection', (socket) => {
         console.log('socket.id', socket.id);
         portData.isUsed = true;
         io.emit('charge_ready', portData);
+        console.log(socketList);
     });
 
     socket.on('kickboard_ready', (kickboardData) => {
